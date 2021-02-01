@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            *{
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+            }
+            div{
+                width:70%;
+                margin-top:5%;
+                margin-left:auto;
+                margin-right:auto;
+            }
+            form{
+                text-align: right;
+                display: inline-block;
+                width: 25%;
+            }
+            label{
+                font-size: 18px;
+                font-weight: bold;
+                display: block;
+                margin-bottom:10px;
+            }
+            input[type=text], select{
+                font-size: 16px;
+                margin-bottom:10px;
+            }
+            input[type=text]{
+                max-width: 100%;
+                text-align: right;
+            }
+             input[type=submit]{
+                padding: 5px 20px;
+                font-size: 16px;
+                text-decoration: none;
+                margin: 10px auto;
+                cursor: pointer;
+            }
+            p{
+                color: #FF3333;
+            }
+            img{
+                display: inline-block;
+                width: 100%;
+                height: auto;
+            }
+            footer{
+                width: 90%;
+                position: absolute;
+                bottom: 0;
+                margin: 0 auto;
+                text-align: center;
+            }
+            #divImage{
+                margin-top: 0;
+                display: inline-block;
+                width: 70%;
+                float: right;
+            }
+        </style>
+        <title>Modulación</title>
+    </head>
+    <body>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <label>Binario</label>
+                <input type="text" name="binario" value="{{binario}}">
+                <p>{{error}}</p>
+                <label>Modulación</label>
+                <select name="codificacion">
+                    <option value="ask" {% if codificacion == "ask" %} selected {%endif%}>ASK</option>
+                    <option value="fsk" {% if codificacion == "fsk" %} selected {%endif%}>FSK</option>
+                    <option value="psk" {% if codificacion == "psk" %} selected {%endif%}>PSK</option>
+                    <option value="qam" {% if codificacion == "qam" %} selected {%endif%}>QAM</option>
+                </select><br>
+                <input type="submit" value="Graficar"><br>
+            </form>
+            <div id="divImage">
+            {% if uri %}
+                <img src="data:image/png;base64,{{uri}}">
+            {% endif %}
+            </div>
+        </div>
+        <footer>
+            Gabriel Banda
+        </footer>
+    </body>
+</html>
